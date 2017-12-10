@@ -39,6 +39,9 @@ $parsed_args = Parse-Args $args -supports_check_mode $true
 $check_mode = Get-AnsibleParam $parsed_args "_ansible_check_mode" -default $false
 $dns_domain_name = Get-AnsibleParam $parsed_args "dns_domain_name" -failifempty $true
 $safe_mode_admin_password = Get-AnsibleParam $parsed_args "safe_mode_password" -failifempty $true
+$netbios_name = Get-AnsibleParam $parsed_args "netbios_name" -default $null
+$domain_mode = Get-AnsibleParam $parsed_args "domain_mode" -default "Win2012R2"
+$forest_mode = Get-AnsibleParam $parsed_args "forest_mode" -default "Win2012R2"
 
 $forest = $null
 
@@ -71,6 +74,9 @@ If(-not $forest) {
             SkipPreChecks=$true;
             InstallDNS=$true;
             NoRebootOnCompletion=$true;
+            DomainMode=$domain_mode;
+            ForestMode=$forest_mode;
+            DomainNetbiosName=$netbios_name;
         }
 
         $iaf = Install-ADDSForest @install_forest_args

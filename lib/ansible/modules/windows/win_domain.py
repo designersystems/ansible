@@ -39,6 +39,18 @@ options:
     description:
       - safe mode password for the domain controller
     required: true
+  netbios_name:
+    description:
+      - netbios name for new forest if the domain is created, this value is automatically computed by Install-ADDSForest if not specified
+    required: false
+  domain_mode:
+    description:
+      - sets the domain mode if the domain is created
+  required: false
+  forest_mode:
+    description:
+      - sets the forest mode if the domain is created
+  required: false
 author:
     - Matt Davis (@nitzmahone)
 '''
